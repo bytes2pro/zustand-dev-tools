@@ -1,0 +1,55 @@
+node_modules/
+dist/
+.turbo/
+.pnpm-store/
+.DS_Store
+coverage/
+*.log
+.env
+.env.*
+.idea/
+.vscode/
+.changeset/*.md
+# Dependencies
+node_modules/
+
+# Build outputs
+/dist/
+/build/
+/lib/
+
+# Turbo / Caches
+/.turbo/
+/.vite/
+
+# Next.js
+/.next/
+/out/
+/.vercel/
+
+# Coverage
+/coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env & npm config
+.env
+.env.*
+!.env.example
+.npmrc
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+packages/next-ui/dist

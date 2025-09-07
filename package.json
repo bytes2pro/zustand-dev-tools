@@ -1,0 +1,125 @@
+{
+  "name": "rte-client-side-template",
+  "private": true,
+  "description": "Template for publishing your client-side npm packages",
+  "version": "0.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev --parallel",
+    "lint": "eslint . --ext .ts,.tsx,.vue,.js --max-warnings 0",
+    "lint:fix": "eslint . --ext .ts,.tsx,.vue,.js --fix",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "size": "size-limit",
+    "release": "changeset publish",
+    "version-packages": "changeset version",
+    "changeset": "changeset",
+    "scaffold": "node scripts/scaffold.mjs",
+    "set-scope": "node scripts/set-scope.mjs",
+    "set-umbrella": "node scripts/set-umbrella-name.mjs",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@preact/preset-vite": "^2.9.1",
+    "@size-limit/preset-big-lib": "^11.1.5",
+    "@solidjs/testing-library": "^0.8.7",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/vue": "^8.1.0",
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "svelte": "^4.2.0",
+    "svelte-check": "^4.0.0",
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-solid": "^0.14.3",
+    "eslint-plugin-vue": "^9.27.0",
+    "globals": "^15.11.0",
+    "husky": "^9.1.6",
+    "jsdom": "^24.1.0",
+    "lint-staged": "^15.2.10",
+    "autoprefixer": "^10.4.20",
+    "clsx": "^2.1.1",
+    "class-variance-authority": "^0.7.0",
+    "lit": "^3.2.1",
+    "postcss": "^8.4.47",
+    "preact": "^10.22.0",
+    "prettier": "^3.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss": "^3.4.13",
+    "tailwindcss-animate": "^1.0.7",
+    "size-limit": "^11.1.5",
+    "solid-js": "^1.8.17",
+    "tsup": "^8.0.1",
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^8.15.0",
+    "vite-plugin-solid": "^2.10.2",
+    "vitest": "^2.0.5",
+    "vue": "^3.4.29"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,vue,js,css,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "size-limit": [
+    {
+      "name": "react-ui esm",
+      "path": "packages/react-ui/dist/index.esm.js",
+      "limit": "15 KB"
+    },
+    {
+      "name": "next-ui esm",
+      "path": "packages/next-ui/dist/index.mjs",
+      "limit": "15 KB"
+    },
+    {
+      "name": "vue-ui esm",
+      "path": "packages/vue-ui/dist/vue-ui.es.js",
+      "limit": "15 KB"
+    },
+    {
+      "name": "solid-ui esm",
+      "path": "packages/solid-ui/dist/solid-ui.es.js",
+      "limit": "20 KB"
+    },
+    {
+      "name": "preact-ui esm",
+      "path": "packages/preact-ui/dist/index.esm.js",
+      "limit": "15 KB"
+    },
+    {
+      "name": "lit-ui esm",
+      "path": "packages/lit-ui/dist/index.esm.js",
+      "limit": "15 KB"
+    },
+    {
+      "name": "nuxt-ui esm",
+      "path": "packages/nuxt-ui/dist/index.esm.js",
+      "limit": "15 KB"
+    },
+    {
+      "name": "svelte-ui esm",
+      "path": "packages/svelte-ui/dist/index.esm.js",
+      "limit": "15 KB"
+    }
+  ],
+  "packageManager": "pnpm@9.0.0"
+}
