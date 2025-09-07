@@ -1,5 +1,3 @@
-import { ScrollArea } from '@/ui/scroll-area';
-import { Slider } from '@/ui/slider';
 import {
   ChevronLeft,
   ChevronRight,
@@ -12,6 +10,8 @@ import {
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { HighlightedJson } from './HighlightedJson';
 import { HistoryEntry, StoreInfo } from './types';
+import { ScrollArea } from './ui/scroll-area';
+import { Slider } from './ui/slider';
 
 interface HistoryViewProps {
   selectedStore: string;

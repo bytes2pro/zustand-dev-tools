@@ -2,7 +2,7 @@
   "name": "rte-client-side-template",
   "private": true,
   "description": "Template for publishing your client-side npm packages",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "workspaces": [
     "packages/*"
   ],

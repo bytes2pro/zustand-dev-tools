@@ -1,15 +1,14 @@
 'use client';
 
-import { GraphView } from '@/GraphView';
-import { HighlightedJson } from '@/HighlightedJson';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import { DatabaseZap, Loader2, Moon, Settings2, Sun, X } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-
-import { HistoryView } from '@/HistoryView';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select';
+import { GraphView } from './GraphView';
+import { HighlightedJson } from './HighlightedJson';
+import { HistoryView } from './HistoryView';
 import { SettingsView, useDevtoolsSettings } from './SettingsView';
 import { DevtoolsSettings, StoreInfo, ViewMode } from './types';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 
 // Deeply serialize objects for display: Map -> object, Set -> array, Date -> ISO
 function serializeState(value: any, seen = new WeakSet()): any {
