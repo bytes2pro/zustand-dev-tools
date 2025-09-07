@@ -22,6 +22,18 @@ export default [
         sourceType: 'module',
       },
     },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-function-type': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+    },
   },
   {
     files: ['**/*.tsx'],
@@ -59,10 +71,13 @@ export default [
     },
   },
   {
-    files: ['scripts/**/*.{js,mjs,ts}', '**/*.config.{js,cjs,ts,mjs}', '**/vite.config.ts', '**/tsup.config.ts'],
+    files: [
+      'scripts/**/*.{js,mjs,ts}',
+      '**/*.config.{js,cjs,ts,mjs}',
+      '**/vite.config.ts',
+      '**/tsup.config.ts',
+    ],
     languageOptions: { globals: globals.node },
   },
   prettier,
 ];
-
-
