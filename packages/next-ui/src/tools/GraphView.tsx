@@ -1,8 +1,8 @@
 'use client';
 
+import { GraphEdge, GraphNode } from '@/types';
 import { RotateCcw } from 'lucide-react';
 import { useMemo, useRef, useState } from 'react';
-import { GraphEdge, GraphNode } from './types';
 
 function getFunctionSignature(fn: any): string {
   try {

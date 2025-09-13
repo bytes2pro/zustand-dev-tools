@@ -1,11 +1,11 @@
+import { DevtoolsSettings } from '@/types';
+import { Button } from '@/ui/button';
+import { Checkbox } from '@/ui/checkbox';
+import { Input } from '@/ui/input';
+import { Separator } from '@/ui/separator';
+import { Slider } from '@/ui/slider';
 import { Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { DevtoolsSettings } from './types';
-import { Button } from './ui/button';
-import { Checkbox } from './ui/checkbox';
-import { Input } from './ui/input';
-import { Separator } from './ui/separator';
-import { Slider } from './ui/slider';
 
 const LOCAL_STORAGE_KEY = 'zustandDevtoolsSettings';
 

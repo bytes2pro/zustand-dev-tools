@@ -1,12 +1,14 @@
 'use client';
 
 import { DatabaseZap, Loader2, Moon, Settings2, Sun, X } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
-import { GraphView } from './GraphView';
-import { HighlightedJson } from './HighlightedJson';
-import { HistoryView } from './HistoryView';
-import { SettingsView, useDevtoolsSettings } from './SettingsView';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { cn } from './lib/utils';
+import { GraphView } from './tools/GraphView';
+import { HighlightedJson } from './tools/HighlightedJson';
+import { HistoryView } from './tools/HistoryView';
+import { SettingsView, useDevtoolsSettings } from './tools/SettingsView';
 import { DevtoolsSettings, StoreInfo, ViewMode } from './types';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 
@@ -43,14 +45,22 @@ function serializeState(value: any, seen = new WeakSet()): any {
 interface ZustandDevtoolsProps {
   stores: StoreInfo[];
   defaultSettings?: Partial<DevtoolsSettings>;
+  className?: string;
 }
 
-export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({ stores, defaultSettings }) => {
+export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
+  stores,
+  defaultSettings,
+  className = 'bottom-2 right-2',
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [popoverSide, setPopoverSide] = useState<'top' | 'bottom' | 'left' | 'right'>('top');
+  const [popoverAlign, setPopoverAlign] = useState<'start' | 'center' | 'end'>('end');
   const [selectedStore, setSelectedStore] = useState<string>('');
   const [viewMode, setViewMode] = useState<ViewMode>('json');
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
   const [isDark, setIsDark] = useState<boolean>(false);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
 
   const zustandStores = useMemo(() => stores, [stores]);
 
@@ -82,6 +92,24 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({ stores, defaul
     setIsDark(document.documentElement.classList.contains('dark'));
   }, []);
 
+  const computePlacement = () => {
+    const btn = triggerRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const verticalCenter = rect.top + rect.height / 2;
+    const horizontalCenter = rect.left + rect.width / 2;
+
+    const side = verticalCenter > vh / 2 ? 'top' : 'bottom';
+    let align: 'start' | 'center' | 'end' = 'center';
+    if (horizontalCenter < vw * 0.33) align = 'start';
+    else if (horizontalCenter > vw * 0.66) align = 'end';
+
+    setPopoverSide(side);
+    setPopoverAlign(align);
+  };
+
   const toggleTheme = () => {
     const newTheme = !isDark;
     setIsDark(newTheme);
@@ -108,22 +136,40 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({ stores, defaul
 
   return (
     <>
-      {/* Toggle Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-3 right-20 z-50 overflow-hidden rounded-full w-12 h-12 flex items-center justify-center shadow-xl ring-2 ring-white/50 dark:ring-white/10 bg-gradient-to-br from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition-all duration-200"
-        title="Zustand DevTools"
+      <Popover
+        open={isOpen}
+        onOpenChange={(open) => {
+          if (open) {
+            computePlacement();
+          }
+          setIsOpen(open);
+        }}
       >
-        {isAppLoading ? (
-          <Loader2 className="w-6 h-6 text-white animate-spin" />
-        ) : (
-          <DatabaseZap className="w-6 h-6 text-white" />
-        )}
-      </button>
+        {/* Toggle Button */}
+        <PopoverTrigger asChild>
+          <button
+            ref={triggerRef}
+            className={cn(
+              'fixed z-50 overflow-hidden rounded-full w-12 h-12 flex items-center justify-center shadow-xl ring-2 ring-white/50 dark:ring-white/10 bg-gradient-to-br from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition-all duration-200',
+              className,
+            )}
+            title="Zustand DevTools"
+          >
+            {isAppLoading ? (
+              <Loader2 className="w-6 h-6 text-white animate-spin" />
+            ) : (
+              <DatabaseZap className="w-6 h-6 text-white" />
+            )}
+          </button>
+        </PopoverTrigger>
 
-      {/* Floating Panel */}
-      {isOpen && (
-        <div className="fixed bottom-24 right-20 z-50 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 w-[480px] h-[420px] overflow-hidden">
+        {/* Floating Panel */}
+        <PopoverContent
+          side={popoverSide}
+          align={popoverAlign}
+          sideOffset={10}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 w-[480px] h-[420px] overflow-hidden p-0"
+        >
           {/* Header */}
           <div className="bg-inherit">
             <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-lime-50 to-yellow-50 dark:from-zinc-900 dark:to-zinc-800">
@@ -233,8 +279,8 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({ stores, defaul
               </Tabs>
             </div>
           </div>
-        </div>
-      )}
+        </PopoverContent>
+      </Popover>
     </>
   );
 };

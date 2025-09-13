@@ -6,8 +6,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, '..');
-const umbrellaDir = path.join(root, 'packages', 'umbrella');
-const distDir = path.join(umbrellaDir, 'dist');
+const distDir = path.join(root, 'dist');
 
 const sources = {
   react: path.join(root, 'packages', 'react-ui', 'dist'),
@@ -47,4 +46,4 @@ if (missing.length) {
   );
 }
 
-console.log('✔ Umbrella dist assembled at packages/umbrella/dist');
+console.log('✔ Your packages have been assembled at dist');
