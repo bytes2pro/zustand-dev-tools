@@ -81,6 +81,22 @@ if (fs.existsSync(packagesDir)) {
   }
 }
 
+// 1b) Update root package.json name
+const rootPkgPath = path.join(root, 'package.json');
+if (fs.existsSync(rootPkgPath)) {
+  try {
+    const rootPkg = readJson(rootPkgPath);
+    if (typeof rootPkg.name === 'string' && rootPkg.name.startsWith(currentScope + '/')) {
+      const namePart = rootPkg.name.split('/')[1];
+      rootPkg.name = `${newScope}/${namePart}`;
+      writeJson(rootPkgPath, rootPkg);
+      console.log(`✔ Updated root package name -> ${rootPkg.name}`);
+    }
+  } catch {
+    /* ignore: skip unreadable root package.json */
+  }
+}
+
 // 2) Replace references in docs and README
 const filesToUpdate = [];
 function walk(dir) {

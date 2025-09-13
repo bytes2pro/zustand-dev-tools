@@ -1,17 +1,17 @@
-# @rte/solid-ui
+# @bytes2pro/solid-ui
 
 SolidJS component library template.
 
 ## Install
 
 ```bash
-pnpm add @rte/solid-ui
+pnpm add @bytes2pro/solid-ui
 ```
 
 ## Usage
 
 ```tsx
-import { SButton } from '@rte/solid-ui';
+import { SButton } from '@bytes2pro/solid-ui';
 ```
 
 ## Development

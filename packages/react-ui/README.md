@@ -1,17 +1,17 @@
-# @rte/react-ui
+# @bytes2pro/react-ui
 
 React component library template.
 
 ## Install
 
 ```bash
-pnpm add @rte/react-ui
+pnpm add @bytes2pro/react-ui
 ```
 
 ## Usage
 
 ```tsx
-import { Button } from '@rte/react-ui';
+import { Button } from '@bytes2pro/react-ui';
 ```
 
 ## Development

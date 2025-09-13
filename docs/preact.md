@@ -9,7 +9,7 @@
 ## Usage
 
 ```tsx
-import { PButton } from '@rte/preact-ui';
+import { PButton } from '@bytes2pro/preact-ui';
 
 export function App() {
   return <PButton>Preact</PButton>;

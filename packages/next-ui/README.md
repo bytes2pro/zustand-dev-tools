@@ -1,18 +1,18 @@
-# @rte/next-ui
+# @bytes2pro/next-ui
 
 Next.js-ready React components.
 
 ## Install
 
 ```bash
-pnpm add @rte/next-ui
+pnpm add @bytes2pro/next-ui
 ```
 
 ## Usage
 
 ```tsx
 'use client';
-import { ClientButton } from '@rte/next-ui';
+import { ClientButton } from '@bytes2pro/next-ui';
 ```
 
 ## Development

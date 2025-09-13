@@ -1,4 +1,4 @@
-# @rte/zustand-dev-tools
+# @bytes2pro/zustand-dev-tools
 
 ## 0.1.0
 

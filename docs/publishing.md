@@ -41,7 +41,7 @@ pnpm release
 
 ### Configure scope across the repo
 
-Run once to update all package names and docs from the default `@rte/*` to your scope:
+Run once to update all package names and docs from the default `@bytes2pro/*` to your scope:
 
 ```bash
 pnpm set-scope -- --scope @your-scope

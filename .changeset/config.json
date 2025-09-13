@@ -13,13 +13,13 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "@rte/react-ui",
-    "@rte/next-ui",
-    "@rte/vue-ui",
-    "@rte/solid-ui",
-    "@rte/preact-ui",
-    "@rte/nuxt-ui",
-    "@rte/lit-ui",
-    "@rte/svelte-ui"
+    "@bytes2pro/react-ui",
+    "@bytes2pro/next-ui",
+    "@bytes2pro/vue-ui",
+    "@bytes2pro/solid-ui",
+    "@bytes2pro/preact-ui",
+    "@bytes2pro/nuxt-ui",
+    "@bytes2pro/lit-ui",
+    "@bytes2pro/svelte-ui"
   ]
 }

@@ -9,7 +9,7 @@
 ## Usage
 
 ```tsx
-import { Button } from '@rte/react-ui';
+import { Button } from '@bytes2pro/react-ui';
 ```
 
 ## Creating a new React package

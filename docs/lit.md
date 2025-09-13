@@ -9,7 +9,7 @@
 ## Usage
 
 ```ts
-import '@rte/lit-ui';
+import '@bytes2pro/lit-ui';
 // Now you can use the element anywhere
 // <my-button variant="primary">Hello</my-button>
 ```

@@ -11,7 +11,7 @@
 ```vue
 <!-- pages/index.vue -->
 <script setup lang="ts">
-import { NuxtButton } from '@rte/nuxt-ui';
+import { NuxtButton } from '@bytes2pro/nuxt-ui';
 </script>
 
 <template>

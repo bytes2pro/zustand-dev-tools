@@ -1,17 +1,17 @@
-# @rte/vue-ui
+# @bytes2pro/vue-ui
 
 Vue 3 component library template.
 
 ## Install
 
 ```bash
-pnpm add @rte/vue-ui
+pnpm add @bytes2pro/vue-ui
 ```
 
 ## Usage
 
 ```ts
-import { VButton } from '@rte/vue-ui';
+import { VButton } from '@bytes2pro/vue-ui';
 app.component('VButton', VButton);
 ```
 

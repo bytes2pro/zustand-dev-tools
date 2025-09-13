@@ -103,7 +103,7 @@ CI will open a Version PR or publish on pushes to `main` when `NPM_TOKEN` is set
 - React usage:
 
 ```tsx
-import { Button } from '@rte/zustand-dev-tools/react';
+import { Button } from '@bytes2pro/zustand-dev-tools/react';
 
 export function App() {
   return <Button variant="primary">Click</Button>;
@@ -114,7 +114,7 @@ export function App() {
 
 ```tsx
 'use client';
-import { ZustandDevtools } from '@rte/zustand-dev-tools/next';
+import { ZustandDevtools } from '@bytes2pro/zustand-dev-tools/next';
 
 export default function Page() {
   return <ClientButton>Next</ClientButton>;
@@ -125,14 +125,14 @@ export default function Page() {
 
 ```ts
 import { createApp } from 'vue';
-import { VButton } from '@rte/zustand-dev-tools/vue';
+import { VButton } from '@bytes2pro/zustand-dev-tools/vue';
 createApp({}).component('VButton', VButton).mount('#app');
 ```
 
 - SolidJS:
 
 ```tsx
-import { SButton } from '@rte/zustand-dev-tools/solid';
+import { SButton } from '@bytes2pro/zustand-dev-tools/solid';
 
 export default function App() {
   return <SButton>Solid</SButton>;
@@ -161,8 +161,8 @@ This template includes an umbrella package that re-exports each framework build 
 How-to:
 
 - Build framework packages first: `pnpm build`
-- Build umbrella: `pnpm --filter @rte/your-package build` (copies framework dists into `packages/umbrella/dist`)
-- Rename `@rte/your-package` in `packages/umbrella/package.json` to your final name (e.g., `@your-scope/your-package-name`)
+- Build umbrella: `pnpm --filter @bytes2pro/your-package build` (copies framework dists into `packages/umbrella/dist`)
+- Rename `@bytes2pro/your-package` in `packages/umbrella/package.json` to your final name (e.g., `@your-scope/your-package-name`)
 - Publish: `pnpm release`
 
 ## Docs

@@ -40,7 +40,7 @@ After this, new scaffolds default to `@your-scope` automatically.
 
 ### Single package with subpath exports
 
-This repo now publishes a single package from the repo root (`@rte/zustand-dev-tools`) with subpath exports for each framework, e.g. `@rte/zustand-dev-tools/react`, `@rte/zustand-dev-tools/next`, `@rte/zustand-dev-tools/vue`, etc.
+This repo now publishes a single package from the repo root (`@bytes2pro/zustand-dev-tools`) with subpath exports for each framework, e.g. `@bytes2pro/zustand-dev-tools/react`, `@bytes2pro/zustand-dev-tools/next`, `@bytes2pro/zustand-dev-tools/vue`, etc.
 
 Steps:
 

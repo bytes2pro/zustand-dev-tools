@@ -10,7 +10,7 @@
 
 ```tsx
 'use client';
-import { ClientButton } from '@rte/next-ui';
+import { ClientButton } from '@bytes2pro/next-ui';
 ```
 
 ## Creating a new Next package

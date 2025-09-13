@@ -1,37 +1,37 @@
 {
-	"name": "@rte/solid-ui",
-	"version": "0.0.0",
-	"private": true,
-	"description": "SolidJS UI components",
-	"license": "MIT",
-	"main": "dist/solid-ui.cjs.js",
-	"module": "dist/solid-ui.es.js",
-	"types": "dist/index.d.ts",
-	"sideEffects": false,
-	"files": [
-		"dist"
-	],
-	"publishConfig": {
-		"access": "public"
-	},
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/solid-ui.es.js",
-			"require": "./dist/solid-ui.cjs.js"
-		}
-	},
-	"scripts": {
-		"build": "vite build && tsc -p tsconfig.build.json --emitDeclarationOnly",
-		"typecheck": "tsc -p tsconfig.json --noEmit",
-		"clean": "rimraf dist"
-	},
-	"peerDependencies": {
-		"solid-js": ">=1.8.0"
-	},
-	"devDependencies": {
-		"rimraf": "^5.0.5",
-		"vite": "^5.2.0",
-		"vite-plugin-solid": "^2.9.1"
-	}
+  "name": "@bytes2pro/solid-ui",
+  "version": "0.0.0",
+  "private": true,
+  "description": "SolidJS UI components",
+  "license": "MIT",
+  "main": "dist/solid-ui.cjs.js",
+  "module": "dist/solid-ui.es.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/solid-ui.es.js",
+      "require": "./dist/solid-ui.cjs.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json --emitDeclarationOnly",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rimraf dist"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.0"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "vite": "^5.2.0",
+    "vite-plugin-solid": "^2.9.1"
+  }
 }

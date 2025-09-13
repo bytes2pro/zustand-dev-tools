@@ -9,7 +9,7 @@
 ## Usage
 
 ```ts
-import { VButton } from '@rte/vue-ui';
+import { VButton } from '@bytes2pro/vue-ui';
 app.component('VButton', VButton);
 ```
 

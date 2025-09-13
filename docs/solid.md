@@ -9,7 +9,7 @@
 ## Usage
 
 ```tsx
-import { SButton } from '@rte/solid-ui';
+import { SButton } from '@bytes2pro/solid-ui';
 ```
 
 ## Creating a new Solid package
