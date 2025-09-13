@@ -2,9 +2,10 @@
   "name": "@rte/zustand-dev-tools",
   "private": false,
   "description": "Zustand dev tools for monitoring the state of your application",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "."
   ],
   "files": [
     "dist",
@@ -68,7 +69,7 @@
     }
   },
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build && pnpm build:umbrella",
     "clean": "turbo run clean",
     "dev": "turbo run dev --parallel",
     "lint": "eslint . --ext .ts,.tsx,.vue,.js --max-warnings 0",

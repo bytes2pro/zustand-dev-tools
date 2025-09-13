@@ -98,12 +98,12 @@ CI will open a Version PR or publish on pushes to `main` when `NPM_TOKEN` is set
 - Pre-commit hook auto-formats and lints staged files (`husky` + `lint-staged`)
 - Bundles are minimized: peers are externalized, ESM/CJS outputs, tree-shaking, and `size-limit` enforces thresholds
 
-## Framework Quick Starts
+## Framework Quick Starts (single package, subpath exports from root)
 
 - React usage:
 
 ```tsx
-import { Button } from '@rte/react-ui';
+import { Button } from '@rte/zustand-dev-tools/react';
 
 export function App() {
   return <Button variant="primary">Click</Button>;
@@ -114,7 +114,7 @@ export function App() {
 
 ```tsx
 'use client';
-import { ClientButton } from '@rte/next-ui';
+import { ZustandDevtools } from '@rte/zustand-dev-tools/next';
 
 export default function Page() {
   return <ClientButton>Next</ClientButton>;
@@ -125,14 +125,14 @@ export default function Page() {
 
 ```ts
 import { createApp } from 'vue';
-import { VButton } from '@rte/vue-ui';
+import { VButton } from '@rte/zustand-dev-tools/vue';
 createApp({}).component('VButton', VButton).mount('#app');
 ```
 
 - SolidJS:
 
 ```tsx
-import { SButton } from '@rte/solid-ui';
+import { SButton } from '@rte/zustand-dev-tools/solid';
 
 export default function App() {
   return <SButton>Solid</SButton>;

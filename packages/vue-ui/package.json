@@ -1,7 +1,7 @@
 {
   "name": "@rte/vue-ui",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
   "description": "Vue 3 UI components",
   "license": "MIT",
   "main": "dist/vue-ui.cjs.js",

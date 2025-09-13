@@ -38,18 +38,14 @@ pnpm set-scope -- --scope @your-scope
 
 After this, new scaffolds default to `@your-scope` automatically.
 
-### Umbrella package (subpath exports)
+### Single package with subpath exports
 
-This repo includes an umbrella package at `packages/umbrella` that re-exports each framework build so consumers can import from subpaths like `@scope/pkg/react` or `@scope/pkg/nuxt`.
+This repo now publishes a single package from the repo root (`@rte/zustand-dev-tools`) with subpath exports for each framework, e.g. `@rte/zustand-dev-tools/react`, `@rte/zustand-dev-tools/next`, `@rte/zustand-dev-tools/vue`, etc.
 
-Steps (template usage):
+Steps:
 
-- Build frameworks: `pnpm build`
-- Assemble umbrella: `pnpm --filter @rte/your-package build`
-- Rename umbrella only: `pnpm set-umbrella -- --scope @your-scope --name z-devtools`
-- Publish via Changesets
-
-Note: `pnpm set-scope` intentionally does not rename the umbrella package so the template keeps its `@rte/*` default. Use `set-umbrella` to rename just the umbrella package for publishing.
+- Build frameworks: `pnpm build` (this also assembles `dist/` at the root)
+- Publish via Changesets: `pnpm changeset` → `pnpm version-packages` → merge PR → CI publishes
 
 ## Development Loop
 

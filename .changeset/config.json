@@ -1,11 +1,25 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config/schema.json",
-  "changelog": "@changesets/cli/changelog",
+  "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "bytes2pro/zustand-dev-tools"
+    }
+  ],
   "commit": false,
   "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": [
+    "@rte/react-ui",
+    "@rte/next-ui",
+    "@rte/vue-ui",
+    "@rte/solid-ui",
+    "@rte/preact-ui",
+    "@rte/nuxt-ui",
+    "@rte/lit-ui",
+    "@rte/svelte-ui"
+  ]
 }

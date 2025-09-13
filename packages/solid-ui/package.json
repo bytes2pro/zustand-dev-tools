@@ -1,7 +1,7 @@
 {
 	"name": "@rte/solid-ui",
 	"version": "0.0.0",
-	"private": false,
+	"private": true,
 	"description": "SolidJS UI components",
 	"license": "MIT",
 	"main": "dist/solid-ui.cjs.js",
