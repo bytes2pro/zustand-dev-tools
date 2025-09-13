@@ -18,6 +18,9 @@
     "lit",
     "svelte"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     "./react": {
       "types": "./dist/react/index.d.ts",
@@ -69,12 +72,12 @@
     }
   },
   "scripts": {
-    "build": "turbo run build && pnpm build:umbrella",
-    "clean": "turbo run clean",
-    "dev": "turbo run dev --parallel",
+    "build": "turbo run build --filter=./packages/* && pnpm build:umbrella",
+    "clean": "turbo run clean --filter=./packages/*",
+    "dev": "turbo run dev --parallel --filter=./packages/*",
     "lint": "eslint . --ext .ts,.tsx,.vue,.js --max-warnings 0",
     "lint:fix": "eslint . --ext .ts,.tsx,.vue,.js --fix",
-    "typecheck": "turbo run typecheck",
+    "typecheck": "turbo run typecheck --filter=./packages/*",
     "format": "prettier --write .",
     "test": "vitest run",
     "size": "size-limit",
@@ -88,6 +91,7 @@
     "build:umbrella": "node scripts/build-umbrella.mjs"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
     "@preact/preset-vite": "^2.9.1",
     "@size-limit/preset-big-lib": "^11.1.5",
