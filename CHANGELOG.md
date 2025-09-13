@@ -1,5 +1,11 @@
 # @bytes2pro/zustand-dev-tools
 
+## 0.1.1
+
+### Patch Changes
+
+- fix UI
+
 ## 0.1.0
 
 ### Minor Changes
