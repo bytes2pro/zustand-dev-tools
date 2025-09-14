@@ -1,16 +1,23 @@
 'use client';
 
+import { ThemeProvider } from '@/components/theme-provider';
+import { GraphView } from '@/components/tools/GraphView';
+import { HighlightedJson } from '@/components/tools/HighlightedJson';
+import { HistoryView } from '@/components/tools/HistoryView';
+import { SettingsView, useDevtoolsSettings } from '@/components/tools/SettingsView';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
+import { DevtoolsSettings, StoreInfo, ViewMode } from '@/types';
 import { DatabaseZap, Loader2, Moon, Settings2, Sun, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { cn } from './lib/utils';
-import { GraphView } from './tools/GraphView';
-import { HighlightedJson } from './tools/HighlightedJson';
-import { HistoryView } from './tools/HistoryView';
-import { SettingsView, useDevtoolsSettings } from './tools/SettingsView';
-import { DevtoolsSettings, StoreInfo, ViewMode } from './types';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 
 // Deeply serialize objects for display: Map -> object, Set -> array, Date -> ISO
 function serializeState(value: any, seen = new WeakSet()): any {
@@ -135,7 +142,7 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
   );
 
   return (
-    <>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
       <Popover
         open={isOpen}
         onOpenChange={(open) => {
@@ -281,6 +288,6 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
           </div>
         </PopoverContent>
       </Popover>
-    </>
+    </ThemeProvider>
   );
 };

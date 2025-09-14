@@ -1,9 +1,9 @@
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
+import { Slider } from '@/components/ui/slider';
 import { DevtoolsSettings } from '@/types';
-import { Button } from '@/ui/button';
-import { Checkbox } from '@/ui/checkbox';
-import { Input } from '@/ui/input';
-import { Separator } from '@/ui/separator';
-import { Slider } from '@/ui/slider';
 import { Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 

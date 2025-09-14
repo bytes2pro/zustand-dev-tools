@@ -1,6 +1,6 @@
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Slider } from '@/components/ui/slider';
 import { HistoryEntry, StoreInfo } from '@/types';
-import { ScrollArea } from '@/ui/scroll-area';
-import { Slider } from '@/ui/slider';
 import {
   ChevronLeft,
   ChevronRight,
