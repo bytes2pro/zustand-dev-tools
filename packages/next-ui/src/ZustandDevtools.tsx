@@ -1,6 +1,5 @@
 'use client';
 
-import { ThemeProvider } from '@/components/theme-provider';
 import { GraphView } from '@/components/tools/GraphView';
 import { HighlightedJson } from '@/components/tools/HighlightedJson';
 import { HistoryView } from '@/components/tools/HistoryView';
@@ -142,7 +141,7 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
   );
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <>
       <Popover
         open={isOpen}
         onOpenChange={(open) => {
@@ -288,6 +287,6 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
           </div>
         </PopoverContent>
       </Popover>
-    </ThemeProvider>
+    </>
   );
 };
