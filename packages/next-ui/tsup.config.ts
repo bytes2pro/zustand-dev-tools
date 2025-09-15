@@ -9,5 +9,7 @@ export default defineConfig({
   treeshake: true,
   splitting: false,
   minify: true,
+  // Auto-inject imported CSS at runtime so consumers don't need a separate import
+  injectStyle: true,
   external: ['react', 'react-dom', 'next'],
 });

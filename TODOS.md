@@ -1,0 +1,8 @@
+- [ ] Fix the auto-publish pipeline
+- [ ] Make toolkit for react
+- [ ] Make toolkit for solid
+- [ ] Make toolkit for svelte
+- [ ] Make toolkit for preact
+- [ ] Make toolkit for nuxt
+- [ ] Make toolkit for lit
+- [ ] Make toolkit for vue

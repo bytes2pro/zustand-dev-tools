@@ -1,5 +1,11 @@
 # @bytes2pro/zustand-dev-tools
 
+## 0.1.11
+
+### Patch Changes
+
+- css fix v11 (pls work this time)
+
 ## 0.1.10
 
 ### Patch Changes
