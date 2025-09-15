@@ -2,7 +2,7 @@
   "name": "@bytes2pro/zustand-dev-tools",
   "private": false,
   "description": "Zustand dev tools for monitoring the state of your application",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "workspaces": [
     "packages/*",
     "."
@@ -30,6 +30,7 @@
     },
     "./next": {
       "types": "./dist/next/index.d.ts",
+      "style": "./dist/next/index.css",
       "import": "./dist/next/index.mjs",
       "require": "./dist/next/index.js",
       "default": "./dist/next/index.mjs"
