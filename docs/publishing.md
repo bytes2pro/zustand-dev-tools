@@ -20,7 +20,7 @@ pnpm version-packages
 4. Publish from CI or locally:
 
 ```bash
-pnpm release
+pnpm publish --access public || pnpm release
 ```
 
 ## CI flow
