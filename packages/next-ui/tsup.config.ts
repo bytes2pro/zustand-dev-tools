@@ -1,12 +1,32 @@
-import { defineConfig } from 'tsup'
+import { defineConfig } from 'tsup';
 
 export default defineConfig({
-	entry: ['src/index.tsx'],
-	format: ['esm', 'cjs'],
-	dts: true,
-	sourcemap: true,
-	clean: true,
-	treeshake: true,
-	splitting: false,
-	external: ['react', 'react-dom', 'next']
-})
+  entry: ['src/index.tsx'],
+  format: ['esm', 'cjs'],
+  dts: true,
+  sourcemap: true,
+  clean: true,
+  treeshake: true,
+  splitting: false,
+  minify: true,
+  platform: 'browser',
+  target: 'es2018',
+  noExternal: [
+    '@radix-ui/react-checkbox',
+    '@radix-ui/react-popover',
+    '@radix-ui/react-scroll-area',
+    '@radix-ui/react-select',
+    '@radix-ui/react-separator',
+    '@radix-ui/react-slider',
+    '@radix-ui/react-slot',
+    '@radix-ui/react-tabs',
+    'class-variance-authority',
+    'clsx',
+    'lucide-react',
+    'next-themes',
+    'shiki',
+    'sonner',
+    'tailwind-merge',
+  ],
+  external: ['react', 'react-dom', 'next'],
+});
