@@ -2,7 +2,7 @@
   "name": "@bytes2pro/zustand-dev-tools",
   "private": false,
   "description": "Zustand dev tools for monitoring the state of your application",
-  "version": "0.1.21",
+  "version": "0.2.0",
   "workspaces": [
     "packages/*",
     "."

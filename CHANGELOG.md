@@ -1,5 +1,11 @@
 # @bytes2pro/zustand-dev-tools
 
+## 0.2.0
+
+### Minor Changes
+
+- imporved css
+
 ## 0.1.21
 
 ### Patch Changes
