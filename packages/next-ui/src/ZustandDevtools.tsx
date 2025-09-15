@@ -222,7 +222,7 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
             </div>
 
             {/* Store Selector */}
-            <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-gray-800/70">
+            <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-white text-black dark:text-white">
               <Select value={selectedStore} onValueChange={setSelectedStore}>
                 <SelectTrigger className="w-full text-xs">
                   <SelectValue placeholder="Select store" />
