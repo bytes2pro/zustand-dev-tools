@@ -17,7 +17,6 @@ import { cn } from '@/lib/utils';
 import { DevtoolsSettings, StoreInfo, ViewMode } from '@/types';
 import { DatabaseZap, Loader2, Moon, Settings2, Sun, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ThemeProvider } from './components/theme-provider';
 
 // Deeply serialize objects for display: Map -> object, Set -> array, Date -> ISO
 function serializeState(value: any, seen = new WeakSet()): any {
@@ -142,7 +141,7 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
   );
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <>
       <Popover
         open={isOpen}
         onOpenChange={(open) => {
@@ -288,6 +287,6 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
           </div>
         </PopoverContent>
       </Popover>
-    </ThemeProvider>
+    </>
   );
 };
