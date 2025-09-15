@@ -110,16 +110,49 @@ export function App() {
 }
 ```
 
-- Next.js (client component):
+- Next.js (Zustand Devtools provider):
+
+Create `ZustandDevtoolsProvider.tsx`:
 
 ```tsx
 'use client';
-import { ZustandDevtools } from '@bytes2pro/zustand-dev-tools/next';
 
-export default function Page() {
-  return <ClientButton>Next</ClientButton>;
+import { memo } from 'react';
+import { ZustandDevtools } from '@bytes2pro/zustand-dev-tools/next';
+import { useExampleStore /*, ...anyNumberOfStores */ } from '@/stores';
+
+export const ZustandDevtoolsProviderComponent = () => {
+  const stores = [
+    { name: 'ExampleStore', store: useExampleStore, state: useExampleStore() },
+    // add more: { name: "OtherStore", store: useOtherStore, state: useOtherStore() }
+  ];
+
+  if (process.env.NODE_ENV !== 'development') return null;
+  return <ZustandDevtools stores={stores} className="bottom-4 right-4" />;
+};
+
+export const ZustandDevtoolsProvider = memo(ZustandDevtoolsProviderComponent);
+```
+
+Then include it in `app/layout.tsx`:
+
+```tsx
+// app/layout.tsx
+import { ZustandDevtoolsProvider } from '@/ZustandDevtoolsProvider';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <ZustandDevtoolsProvider />
+      </body>
+    </html>
+  );
 }
 ```
+
+Note: Styles are auto-injected; no separate CSS import is required.
 
 - Vue 3:
 
@@ -157,6 +190,8 @@ This template includes an umbrella package that re-exports each framework build 
 - `import { ZDev } from '@your-scope/your-package/react'`
 - `import { ZDev } from '@your-scope/your-package/next'`
 - `import { ZDev } from '@your-scope/your-package/nuxt'`
+
+Tools for other frameworks coming soon.
 
 How-to:
 
