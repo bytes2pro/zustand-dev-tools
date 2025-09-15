@@ -2,7 +2,7 @@
   "name": "@bytes2pro/zustand-dev-tools",
   "private": false,
   "description": "Zustand dev tools for monitoring the state of your application",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "workspaces": [
     "packages/*",
     "."
@@ -34,6 +34,9 @@
       "import": "./dist/next/index.mjs",
       "require": "./dist/next/index.js",
       "default": "./dist/next/index.mjs"
+    },
+    "./next/style": {
+      "default": "./dist/next/index.css"
     },
     "./nuxt": {
       "types": "./dist/nuxt/index.d.ts",
@@ -72,6 +75,9 @@
       "default": "./dist/svelte/index.esm.js"
     }
   },
+  "sideEffects": [
+    "dist/next/index.css"
+  ],
   "scripts": {
     "build": "turbo run build --filter=./packages/* && pnpm build:umbrella",
     "clean": "turbo run clean --filter=./packages/*",

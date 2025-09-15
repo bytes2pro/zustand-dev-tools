@@ -67,8 +67,6 @@ console.log(`Updating scope: ${currentScope} -> ${newScope}`);
 if (fs.existsSync(packagesDir)) {
   for (const entry of fs.readdirSync(packagesDir, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
-    // Keep umbrella package scoped to @rte by default; users will rename it via set-umbrella-name
-    if (entry.name === 'umbrella') continue;
     const pkgJsonPath = path.join(packagesDir, entry.name, 'package.json');
     if (!fs.existsSync(pkgJsonPath)) continue;
     const pkg = readJson(pkgJsonPath);

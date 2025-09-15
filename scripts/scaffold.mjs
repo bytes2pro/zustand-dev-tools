@@ -58,7 +58,6 @@ const templateMap = {
   lit: 'lit-ui',
   preact: 'preact-ui',
   svelte: 'svelte-ui',
-  umbrella: 'umbrella',
 };
 
 if (!templateMap[template]) {
