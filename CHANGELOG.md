@@ -1,5 +1,11 @@
 # @bytes2pro/zustand-dev-tools
 
+## 0.1.19
+
+### Patch Changes
+
+- idk man, not working
+
 ## 0.1.12
 
 ### Patch Changes
