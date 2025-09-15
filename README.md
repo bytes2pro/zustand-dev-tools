@@ -70,6 +70,24 @@ pnpm lint
 pnpm format
 ```
 
+## Develop
+
+In this package:
+
+```bash
+pnpm i
+pnpm clean && pnpm build
+pnpm dlx yalc publish --changed --private
+```
+
+In different project where you want to install this:
+
+```bash
+pnpm remove @bytes2pro/zustand-dev-tools // might fail if package not originally installed
+rm -rf .next/cache node_modules/.cache
+pnpm dlx yalc add @bytes2pro/zustand-dev-tools && pnpm i
+```
+
 ## Publish & Release
 
 1. Record changes
