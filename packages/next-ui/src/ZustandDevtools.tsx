@@ -17,8 +17,8 @@ import { cn } from '@/lib/utils';
 import { DevtoolsSettings, StoreInfo, ViewMode } from '@/types';
 import { DatabaseZap, Loader2, Moon, Settings2, Sun, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import '../dist/index.css';
 import { PortalContainerContext } from './portal-context';
+import './styles/globals.css';
 
 // Deeply serialize objects for display: Map -> object, Set -> array, Date -> ISO
 function serializeState(value: any, seen = new WeakSet()): any {
