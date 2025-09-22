@@ -1,5 +1,11 @@
 # @bytes2pro/zustand-dev-tools
 
+## 0.2.6
+
+### Patch Changes
+
+- fu
+
 ## 0.2.5
 
 ### Patch Changes
