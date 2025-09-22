@@ -176,7 +176,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
 
   return (
     <div className="h-full flex flex-col">
-      <div className="sticky top-0 z-10 px-3 py-2 border-b border-border bg-card/95 backdrop-blur-lg supports-[backdrop-filter]:bg-card/70">
+      <div className="sticky top-0 z-10 px-3 py-2 border-b border-border bg-card">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-1.5">
             <button
@@ -236,7 +236,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
                 onClick={() => setIsRecording(!isRecording)}
                 className={`px-2 py-0.5 rounded-full text-[11px] border transition-colors ${
                   isRecording
-                    ? 'bg-destructive/15 text-destructive border-destructive/30 ring-1 ring-destructive/20'
+                    ? 'bg-destructive text-red-900 dark:text-destructive-foreground border-destructive ring-1 ring-destructive/30'
                     : 'bg-secondary text-secondary-foreground border-border hover:bg-accent hover:text-accent-foreground'
                 }`}
                 title={isRecording ? 'Disable recording' : 'Enable recording'}

@@ -1,5 +1,11 @@
 # @bytes2pro/zustand-dev-tools
 
+## 0.2.2
+
+### Patch Changes
+
+- fixed hsl in tailwind
+
 ## 0.2.1
 
 ### Patch Changes

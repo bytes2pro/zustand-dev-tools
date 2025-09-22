@@ -50,7 +50,7 @@ export function SettingsView({
 }) {
   return (
     <div className="flex flex-col h-full overflow-y-auto p-2 gap-2">
-      <section className="rounded-md border border-border bg-card/70 p-3">
+      <section className="rounded-md border border-border bg-card p-3">
         <div className="flex items-center justify-between mb-2">
           <div className="text-xs font-semibold text-foreground">History</div>
           <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
@@ -110,7 +110,7 @@ export function SettingsView({
           </div>
         </div>
       </section>
-      <section className="rounded-md border border-border bg-card/70 p-3">
+      <section className="rounded-md border border-border bg-card p-3">
         <div className="flex items-center justify-between mb-2">
           <div className="text-xs font-semibold text-foreground">Graph</div>
           <span className="text-[10px] uppercase tracking-wide text-muted-foreground">Layout</span>
@@ -144,7 +144,7 @@ export function SettingsView({
           />
         </div>
       </section>
-      <section className="rounded-md border border-border bg-card/70 p-3">
+      <section className="rounded-md border border-border bg-card p-3">
         <div className="flex items-center justify-between mb-2">
           <div className="text-xs font-semibold text-foreground">JSON</div>
           <span className="text-[10px] uppercase tracking-wide text-muted-foreground">Display</span>

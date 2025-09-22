@@ -242,7 +242,7 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
 
             {/* Content */}
             <div className="overflow-scroll flex flex-col h-full">
-              <div className="flex flex-col bg-background/50">
+              <div className="flex flex-col bg-background">
                 <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as ViewMode)}>
                   <TabsContent value="json" className="m-0 p-0">
                     {serialized ? (
