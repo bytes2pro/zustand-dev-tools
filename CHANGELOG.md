@@ -1,5 +1,11 @@
 # @bytes2pro/zustand-dev-tools
 
+## 0.2.1
+
+### Patch Changes
+
+- Zustand DevTools now ships a fully self-contained themed UI (scoped Tailwind + local dark mode), portals shadcn inside, and includes compiled CSS—no host style bleed.
+
 ## 0.2.0
 
 ### Minor Changes
