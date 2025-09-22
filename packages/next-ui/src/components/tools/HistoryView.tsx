@@ -176,12 +176,12 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
 
   return (
     <div className="h-full flex flex-col">
-      <div className="sticky top-0 z-10 px-3 py-2 border-b border-gray-200 dark:border-gray-700 bg-white/95 dark:bg-gray-900/90 backdrop-blur-lg supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-gray-900/70">
+      <div className="sticky top-0 z-10 px-3 py-2 border-b border-border bg-card/95 backdrop-blur-lg supports-[backdrop-filter]:bg-card/70">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-1.5">
             <button
               onClick={jumpToStart}
-              className="p-1.5 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40"
+              className="p-1.5 rounded-md text-foreground/80 hover:bg-accent hover:text-accent-foreground disabled:opacity-40"
               title="First"
               aria-label="First"
               disabled={selectedHistoryIndex <= 0}
@@ -190,7 +190,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
             </button>
             <button
               onClick={() => step(-1)}
-              className="p-1.5 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40"
+              className="p-1.5 rounded-md text-foreground/80 hover:bg-accent hover:text-accent-foreground disabled:opacity-40"
               title="Previous"
               aria-label="Previous"
               disabled={selectedHistoryIndex <= 0}
@@ -199,7 +199,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
             </button>
             <button
               onClick={togglePlay}
-              className={`p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40 ${isPlaying ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-700 dark:text-gray-200'}`}
+              className={`p-1.5 rounded-md hover:bg-accent hover:text-accent-foreground disabled:opacity-40 ${isPlaying ? 'text-emerald-600 dark:text-emerald-400' : 'text-foreground/80'}`}
               title={isPlaying ? 'Pause' : 'Play'}
               aria-label={isPlaying ? 'Pause' : 'Play'}
               disabled={!selectedHistory || selectedHistory.length <= 1}
@@ -208,7 +208,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
             </button>
             <button
               onClick={() => step(1)}
-              className="p-1.5 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40"
+              className="p-1.5 rounded-md text-foreground/80 hover:bg-accent hover:text-accent-foreground disabled:opacity-40"
               title="Next"
               aria-label="Next"
               disabled={
@@ -219,7 +219,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
             </button>
             <button
               onClick={jumpToEnd}
-              className="p-1.5 rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-40"
+              className="p-1.5 rounded-md text-foreground/80 hover:bg-accent hover:text-accent-foreground disabled:opacity-40"
               title="Last"
               aria-label="Last"
               disabled={
@@ -231,13 +231,13 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
           </div>
           <div className="flex flex-row items-center space-x-2 justify-between w-full">
             <div className="flex items-center gap-2">
-              <HistoryIcon className="size-4 text-gray-500 dark:text-gray-400" />
+              <HistoryIcon className="size-4 text-muted-foreground" />
               <button
                 onClick={() => setIsRecording(!isRecording)}
-                className={`px-2 py-0.5 rounded text-[11px] border ${
+                className={`px-2 py-0.5 rounded-full text-[11px] border transition-colors ${
                   isRecording
-                    ? 'bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-300 dark:border-red-900'
-                    : 'bg-gray-50 text-gray-600 border-gray-200 dark:bg-gray-900/20 dark:text-gray-300 dark:border-gray-800'
+                    ? 'bg-destructive/15 text-destructive border-destructive/30 ring-1 ring-destructive/20'
+                    : 'bg-secondary text-secondary-foreground border-border hover:bg-accent hover:text-accent-foreground'
                 }`}
                 title={isRecording ? 'Disable recording' : 'Enable recording'}
                 aria-pressed={isRecording}
@@ -253,7 +253,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
                 onValueChange={([v]: [number]) => applyHistoryIndex(v)}
               />
             </div>
-            <span className="text-[12px] text-gray-600 dark:text-gray-300 tabular-nums">
+            <span className="text-[12px] text-muted-foreground tabular-nums">
               {selectedHistoryIndex + 1}/{Math.max(1, selectedHistory?.length ?? 1)}
             </span>
           </div>
@@ -264,9 +264,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
           {selectedStoreData ? (
             <HighlightedJson value={selectedHistory[selectedHistoryIndex]?.snapshot ?? {}} />
           ) : (
-            <div className="text-gray-500 dark:text-gray-400 text-center mt-4">
-              No store selected
-            </div>
+            <div className="text-muted-foreground text-center mt-4">No store selected</div>
           )}
         </div>
       </ScrollArea>

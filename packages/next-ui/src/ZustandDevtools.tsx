@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils';
 import { DevtoolsSettings, StoreInfo, ViewMode } from '@/types';
 import { DatabaseZap, Loader2, Moon, Settings2, Sun, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { PortalContainerContext } from './portal-context';
 import './styles/globals.css';
 
 // Deeply serialize objects for display: Map -> object, Set -> array, Date -> ISO
@@ -67,6 +68,7 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
   const [viewMode, setViewMode] = useState<ViewMode>('json');
   const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
   const [isDark, setIsDark] = useState<boolean>(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
 
   const zustandStores = useMemo(() => stores, [stores]);
@@ -95,9 +97,17 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
   }, []);
 
   useEffect(() => {
-    // Check initial theme
-    setIsDark(document.documentElement.classList.contains('dark'));
+    // Initialize theme based on host document, but keep it scoped to devtools only
+    const hostIsDark = document.documentElement.classList.contains('dark');
+    setIsDark(hostIsDark);
   }, []);
+
+  useEffect(() => {
+    // Reflect local dark mode on the scoped root element only
+    if (rootRef.current) {
+      rootRef.current.classList.toggle('zdt-dark', isDark);
+    }
+  }, [isDark]);
 
   const computePlacement = () => {
     const btn = triggerRef.current;
@@ -118,14 +128,7 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
   };
 
   const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-
-    if (newTheme) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    setIsDark((prev) => !prev);
   };
 
   useEffect(() => {
@@ -142,152 +145,152 @@ export const ZustandDevtools: React.FC<ZustandDevtoolsProps> = ({
   );
 
   return (
-    <>
-      <Popover
-        open={isOpen}
-        onOpenChange={(open) => {
-          if (open) {
-            computePlacement();
-          }
-          setIsOpen(open);
-        }}
-      >
-        {/* Toggle Button */}
-        <PopoverTrigger asChild>
-          <button
-            ref={triggerRef}
-            className={cn(
-              'fixed z-50 overflow-hidden rounded-full w-12 h-12 flex items-center justify-center shadow-xl ring-2 ring-white/50 dark:ring-white/10 bg-gradient-to-br from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition-all duration-200',
-              className,
-            )}
-            title="Zustand DevTools"
-          >
-            {isAppLoading ? (
-              <Loader2 className="w-6 h-6 text-white animate-spin" />
-            ) : (
-              <DatabaseZap className="w-6 h-6 text-white" />
-            )}
-          </button>
-        </PopoverTrigger>
-
-        {/* Floating Panel */}
-        <PopoverContent
-          side={popoverSide}
-          align={popoverAlign}
-          sideOffset={10}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 w-[480px] h-[420px] overflow-hidden p-0"
+    <div ref={rootRef} className="zustand-devtools">
+      <PortalContainerContext.Provider value={rootRef.current}>
+        <Popover
+          open={isOpen}
+          onOpenChange={(open) => {
+            if (open) {
+              computePlacement();
+            }
+            setIsOpen(open);
+          }}
         >
-          {/* Header */}
-          <div className="bg-inherit">
-            <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-lime-50 to-yellow-50 dark:from-zinc-900 dark:to-zinc-800">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-emerald-600 text-white text-xs">
-                  Z
-                </span>
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-                  Zustand DevTools
-                </h3>
+          {/* Toggle Button */}
+          <PopoverTrigger asChild>
+            <button
+              ref={triggerRef}
+              className={cn(
+                'fixed z-50 overflow-hidden rounded-full w-12 h-12 flex items-center justify-center shadow-xl ring-2 ring-ring bg-primary text-primary-foreground hover:opacity-90 transition-all duration-200',
+                className,
+              )}
+              title="Zustand DevTools"
+            >
+              {isAppLoading ? (
+                <Loader2 className="w-6 h-6 text-primary-foreground animate-spin" />
+              ) : (
+                <DatabaseZap className="w-6 h-6 text-primary-foreground" />
+              )}
+            </button>
+          </PopoverTrigger>
+
+          {/* Floating Panel */}
+          <PopoverContent
+            side={popoverSide}
+            align={popoverAlign}
+            sideOffset={10}
+            className="bg-card text-card-foreground rounded-xl shadow-2xl border border-border w-[480px] h-[420px] overflow-hidden p-0"
+          >
+            {/* Header */}
+            <div className="bg-inherit">
+              <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-secondary text-secondary-foreground">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground text-xs">
+                    Z
+                  </span>
+                  <h3 className="text-sm font-semibold text-foreground">Zustand DevTools</h3>
+                </div>
+                <div className="flex items-center gap-2">
+                  {/* View Tabs */}
+                  <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as ViewMode)}>
+                    <TabsList>
+                      <TabsTrigger value="json">JSON</TabsTrigger>
+                      <TabsTrigger value="history">History</TabsTrigger>
+                      <TabsTrigger value="graph">Graph</TabsTrigger>
+                    </TabsList>
+                  </Tabs>
+                  <button
+                    onClick={() => setViewMode('settings')}
+                    className="p-1.5 rounded-full bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                    title="Settings"
+                  >
+                    <Settings2 className="w-4 h-4" />
+                  </button>
+                  {/* Theme Toggle */}
+                  <button
+                    onClick={toggleTheme}
+                    className="p-1.5 rounded-full bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                    title={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+                  >
+                    {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                  </button>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                {/* View Tabs */}
+
+              {/* Store Selector */}
+              <div className="px-4 py-2 border-b border-border bg-card text-card-foreground">
+                <Select value={selectedStore} onValueChange={setSelectedStore}>
+                  <SelectTrigger className="w-full text-xs">
+                    <SelectValue placeholder="Select store" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-56">
+                    {zustandStores.map((store) => (
+                      <SelectItem key={store.name} value={store.name} className="text-xs pl-8">
+                        {store.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="overflow-scroll flex flex-col h-full">
+              <div className="flex flex-col bg-background/50">
                 <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as ViewMode)}>
-                  <TabsList>
-                    <TabsTrigger value="json">JSON</TabsTrigger>
-                    <TabsTrigger value="history">History</TabsTrigger>
-                    <TabsTrigger value="graph">Graph</TabsTrigger>
-                  </TabsList>
+                  <TabsContent value="json" className="m-0 p-0">
+                    {serialized ? (
+                      <HighlightedJson
+                        value={serialized}
+                        expandByDefault={settings.json.expandByDefault}
+                      />
+                    ) : (
+                      <div className="text-muted-foreground text-center mt-2 p-2 text-[12px]">
+                        No store selected
+                      </div>
+                    )}
+                  </TabsContent>
+                  <TabsContent value="history" className="m-0 p-0">
+                    <HistoryView
+                      setIsRecording={(v) => {
+                        setSettings((s) => ({ ...s, history: { ...s.history, recording: v } }));
+                      }}
+                      isRecording={settings.history.recording}
+                      selectedStore={selectedStore}
+                      selectedStoreData={selectedStoreData}
+                      stores={zustandStores}
+                      maxHistory={settings.history.maxHistory}
+                      historyPlaybackMs={settings.history.playbackMs}
+                    />
+                  </TabsContent>
+                  <TabsContent value="graph" className="m-0 p-0">
+                    {serialized ? (
+                      <GraphView
+                        data={serialized}
+                        initialMaxDepth={settings.graph.maxDepth}
+                        initialFitWidth={settings.graph.fitWidth}
+                      />
+                    ) : (
+                      <div className="text-muted-foreground text-center mt-2 p-2 text-[12px]">
+                        No store selected
+                      </div>
+                    )}
+                  </TabsContent>
+                  <TabsContent value="settings" className="m-0 p-0">
+                    <SettingsView settings={settings} onChange={setSettings} onReset={reset} />
+                  </TabsContent>
                 </Tabs>
-                <button
-                  onClick={() => setViewMode('settings')}
-                  className="p-1.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                  title="Settings"
-                >
-                  <Settings2 className="w-4 h-4" />
-                </button>
-                {/* Theme Toggle */}
-                <button
-                  onClick={toggleTheme}
-                  className="p-1.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                  title={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-                >
-                  {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                </button>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                >
-                  <X className="w-4 h-4" />
-                </button>
               </div>
             </div>
-
-            {/* Store Selector */}
-            <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-white text-black dark:text-white">
-              <Select value={selectedStore} onValueChange={setSelectedStore}>
-                <SelectTrigger className="w-full text-xs">
-                  <SelectValue placeholder="Select store" />
-                </SelectTrigger>
-                <SelectContent className="max-h-56">
-                  {zustandStores.map((store) => (
-                    <SelectItem key={store.name} value={store.name} className="text-xs pl-8">
-                      {store.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="overflow-scroll flex flex-col h-full">
-            <div className="flex flex-col bg-white/50 dark:bg-gray-900/20">
-              <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as ViewMode)}>
-                <TabsContent value="json" className="m-0 p-0">
-                  {serialized ? (
-                    <HighlightedJson
-                      value={serialized}
-                      expandByDefault={settings.json.expandByDefault}
-                    />
-                  ) : (
-                    <div className="text-gray-500 dark:text-gray-400 text-center mt-2 p-2 text-[12px]">
-                      No store selected
-                    </div>
-                  )}
-                </TabsContent>
-                <TabsContent value="history" className="m-0 p-0">
-                  <HistoryView
-                    setIsRecording={(v) => {
-                      setSettings((s) => ({ ...s, history: { ...s.history, recording: v } }));
-                    }}
-                    isRecording={settings.history.recording}
-                    selectedStore={selectedStore}
-                    selectedStoreData={selectedStoreData}
-                    stores={zustandStores}
-                    maxHistory={settings.history.maxHistory}
-                    historyPlaybackMs={settings.history.playbackMs}
-                  />
-                </TabsContent>
-                <TabsContent value="graph" className="m-0 p-0">
-                  {serialized ? (
-                    <GraphView
-                      data={serialized}
-                      initialMaxDepth={settings.graph.maxDepth}
-                      initialFitWidth={settings.graph.fitWidth}
-                    />
-                  ) : (
-                    <div className="text-gray-500 dark:text-gray-400 text-center mt-2 p-2 text-[12px]">
-                      No store selected
-                    </div>
-                  )}
-                </TabsContent>
-                <TabsContent value="settings" className="m-0 p-0">
-                  <SettingsView settings={settings} onChange={setSettings} onReset={reset} />
-                </TabsContent>
-              </Tabs>
-            </div>
-          </div>
-        </PopoverContent>
-      </Popover>
-    </>
+          </PopoverContent>
+        </Popover>
+      </PortalContainerContext.Provider>
+    </div>
   );
 };

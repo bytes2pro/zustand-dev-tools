@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
 import { Slider } from '@/components/ui/slider';
 import { DevtoolsSettings } from '@/types';
 import { Trash2 } from 'lucide-react';
@@ -50,11 +49,11 @@ export function SettingsView({
   onReset: () => void;
 }) {
   return (
-    <div className="flex flex-col h-full p-2 gap-2">
-      <section className="rounded-md border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/40 p-3">
+    <div className="flex flex-col h-full overflow-y-auto p-2 gap-2">
+      <section className="rounded-md border border-border bg-card/70 p-3">
         <div className="flex items-center justify-between mb-2">
-          <div className="text-xs font-semibold text-gray-800 dark:text-gray-100">History</div>
-          <span className="text-[10px] uppercase tracking-wide text-gray-400 dark:text-gray-500">
+          <div className="text-xs font-semibold text-foreground">History</div>
+          <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
             Playback & Recording
           </span>
         </div>
@@ -70,7 +69,7 @@ export function SettingsView({
             title="Recording"
           />
           <div className="flex items-center gap-2">
-            <span className="text-[11px] text-gray-600 dark:text-gray-300">Delay</span>
+            <span className="text-[11px] text-muted-foreground">Delay</span>
             <div className="w-[160px]">
               <div className="px-2">
                 <div className="w-full">
@@ -89,12 +88,12 @@ export function SettingsView({
                 </div>
               </div>
             </div>
-            <span className="text-[11px] text-gray-600 dark:text-gray-300 tabular-nums w-14 text-right">
+            <span className="text-[11px] text-muted-foreground tabular-nums w-14 text-right">
               {settings.history.playbackMs}ms
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] text-gray-600 dark:text-gray-300">Max history</span>
+            <span className="text-[11px] text-muted-foreground">Max history</span>
             <Input
               className="w-16"
               type="number"
@@ -111,19 +110,14 @@ export function SettingsView({
           </div>
         </div>
       </section>
-
-      <Separator />
-
-      <section className="rounded-md border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/40 p-3">
+      <section className="rounded-md border border-border bg-card/70 p-3">
         <div className="flex items-center justify-between mb-2">
-          <div className="text-xs font-semibold text-gray-800 dark:text-gray-100">Graph</div>
-          <span className="text-[10px] uppercase tracking-wide text-gray-400 dark:text-gray-500">
-            Layout
-          </span>
+          <div className="text-xs font-semibold text-foreground">Graph</div>
+          <span className="text-[10px] uppercase tracking-wide text-muted-foreground">Layout</span>
         </div>
         <div className="flex items-center gap-3 flex-wrap">
           <div className="flex items-center gap-2">
-            <span className="text-[11px] text-gray-600 dark:text-gray-300">Max depth</span>
+            <span className="text-[11px] text-muted-foreground">Max depth</span>
             <Input
               className="w-16"
               type="number"
@@ -150,15 +144,10 @@ export function SettingsView({
           />
         </div>
       </section>
-
-      <Separator />
-
-      <section className="rounded-md border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/40 p-3">
+      <section className="rounded-md border border-border bg-card/70 p-3">
         <div className="flex items-center justify-between mb-2">
-          <div className="text-xs font-semibold text-gray-800 dark:text-gray-100">JSON</div>
-          <span className="text-[10px] uppercase tracking-wide text-gray-400 dark:text-gray-500">
-            Display
-          </span>
+          <div className="text-xs font-semibold text-foreground">JSON</div>
+          <span className="text-[10px] uppercase tracking-wide text-muted-foreground">Display</span>
         </div>
         <Checkbox
           checked={settings.json.expandByDefault}
@@ -171,7 +160,6 @@ export function SettingsView({
           title="Expand by default"
         />
       </section>
-
       <div className="pt-2">
         <Button onClick={onReset} variant="destructive" size="sm" title="Reset settings">
           <Trash2 className="size-4" /> Reset settings

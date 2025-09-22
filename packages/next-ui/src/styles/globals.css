@@ -1,9 +1,11 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@custom-variant dark (:where(.dark &));
+/* Remap dark variant to a scoped class to avoid toggling the host app */
+@custom-variant dark (:where(.zdt-dark &));
 
-:root {
+/* Scope CSS variables to the devtools root to avoid leaking to the host */
+.zustand-devtools {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -39,7 +41,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
+.zustand-devtools.zdt-dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
@@ -113,11 +115,17 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Scope base to devtools only */
 @layer base {
-  * {
+  .zustand-devtools * {
     @apply border-border outline-ring/50;
   }
-  body {
+  .zustand-devtools {
     @apply bg-background text-foreground;
   }
+}
+
+/* Normalize Shiki backgrounds inside devtools so theme tokens show through */
+.zustand-devtools pre.shiki {
+  background-color: transparent !important;
 }

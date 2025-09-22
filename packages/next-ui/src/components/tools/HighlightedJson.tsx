@@ -15,6 +15,20 @@ async function getShiki(): Promise<Highlighter> {
 function useHighlightedCode(code: string, lang: 'ts' | 'js' = 'ts') {
   const [html, setHtml] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Observe the devtools root for theme changes and keep local state in sync
+    const root =
+      typeof document !== 'undefined' ? document.querySelector('.zustand-devtools') : null;
+    if (root) {
+      const update = () => setIsDark(root.classList.contains('zdt-dark'));
+      update();
+      const observer = new MutationObserver(update);
+      observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+      return () => observer.disconnect();
+    }
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -22,9 +36,7 @@ function useHighlightedCode(code: string, lang: 'ts' | 'js' = 'ts') {
       try {
         setLoading(true);
         const highlighter = await getShiki();
-        const dark =
-          typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
-        const theme = dark ? 'github-dark' : 'github-light';
+        const theme = isDark ? 'github-dark' : 'github-light';
         const out = highlighter.codeToHtml(code, { lang, theme });
         if (mounted) setHtml(out);
       } catch {
@@ -36,7 +48,7 @@ function useHighlightedCode(code: string, lang: 'ts' | 'js' = 'ts') {
     return () => {
       mounted = false;
     };
-  }, [code, lang]);
+  }, [code, lang, isDark]);
 
   return { html, loading };
 }
@@ -74,7 +86,7 @@ function CopyButton({ value }: { value: any }) {
       onClick={onCopy}
       title="Copy value"
       aria-label="Copy value"
-      className="ml-1 inline-flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-500 dark:text-gray-400"
+      className="ml-1 inline-flex items-center justify-center rounded text-muted-foreground hover:bg-accent hover:text-accent-foreground"
     >
       {copied ? <Check className="size-3" /> : <Copy className="size-3" />}
     </button>
@@ -98,17 +110,17 @@ function FunctionEntry({ name, fn }: { name?: string; fn: Function }) {
         <span className="text-amber-700 dark:text-amber-300">ƒ {fn.name || 'anonymous'}</span>
       </summary>
       {loading ? (
-        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 p-2">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground p-2">
           <span className="animate-spin inline-block w-3 h-3 rounded-full border-2 border-emerald-500 border-t-transparent" />
           Highlighting...
         </div>
       ) : html ? (
         <div
-          className="text-[12px] rounded border border-gray-200 dark:border-gray-700 overflow-auto"
+          className="text-[12px] rounded border border-border overflow-auto bg-card"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       ) : (
-        <pre className="text-[12px] whitespace-pre-wrap text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-zinc-900 p-2 rounded border border-gray-200 dark:border-gray-700 overflow-auto">
+        <pre className="text-[12px] whitespace-pre-wrap text-foreground bg-card p-2 rounded border border-border overflow-auto">
           <code className="language-ts">{code}</code>
         </pre>
       )}

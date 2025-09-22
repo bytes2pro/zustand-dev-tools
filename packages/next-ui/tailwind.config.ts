@@ -3,6 +3,7 @@ import animate from 'tailwindcss-animate';
 
 const config: Config = {
   darkMode: 'class',
+  important: '.zustand-devtools',
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
