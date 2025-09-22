@@ -5,11 +5,11 @@ export default defineConfig({
   format: ['esm', 'cjs'],
   dts: true,
   sourcemap: true,
-  clean: true,
+  clean: false,
   treeshake: true,
   splitting: false,
   minify: true,
-  // Auto-inject imported CSS at runtime so consumers don't need a separate import
-  injectStyle: true,
+  // Do not auto-inject CSS; consumers import CSS explicitly from package export
+  injectStyle: false,
   external: ['react', 'react-dom', 'next'],
 });
