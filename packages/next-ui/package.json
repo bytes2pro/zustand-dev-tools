@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build:css": "postcss src/styles/globals.css -o dist/index.css --env production",
-    "build": "rimraf dist && pnpm run build:css && tsup src/index.tsx --format esm,cjs --dts --sourcemap --clean",
+    "build": "rimraf dist && pnpm run build:css && tsup src/index.tsx --format esm,cjs --dts --sourcemap",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "clean": "rimraf dist"
   },
